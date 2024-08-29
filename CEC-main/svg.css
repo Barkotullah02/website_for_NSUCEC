@@ -1,0 +1,21 @@
+/* OUR EVENTS */
+
+position: absolute;
+width: 454px;
+height: 77px;
+left: 1231px;
+top: 3672px;
+
+font-family: 'Judson';
+font-style: normal;
+font-weight: 400;
+font-size: 64px;
+line-height: 80px;
+/* or 125% */
+text-align: center;
+letter-spacing: 0.2em;
+
+color: #FFFFFF;
+
+border: 1px solid #FFFFFF;
+transform: rotate(-90deg);
