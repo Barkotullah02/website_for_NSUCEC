@@ -1,6 +1,21 @@
 <?php
 include "db_connection.php";
 
+// SQL query to count the number of rows in the members table
+$sql = "SELECT COUNT(*) as total FROM members";
+
+// Execute the query
+$result = mysqli_query($connection, $sql);
+
+// Fetch the result
+$row = mysqli_fetch_assoc($result);
+
+// Get the count from the fetched row
+$totalMembers = $row['total'];
+
+
+
+
 if (isset($_POST['fc_update'])) {
     $description11 = $_POST['fc_details'];
     $image11 = $_FILES['fc_image']['name'];
@@ -187,7 +202,9 @@ while ($row1 = mysqli_fetch_assoc($data1)) {
     <!-- Number Box -->
     <section class="num-box">
         <div class="subNum">
-            <div class="num3"><b class="counter-item">2015</b><p class="est">EST. SINCE</p></div><div class="num1"><b class="counter-item-slow">11</b>K<p class="est">VISITORS</p></div><div class="num2"><b class="counter-item-slow">11</b>K<p class="est">MEMBERS</p></div>
+            <div class="num3"><b class="counter-item">2015</b><p class="est">EST. SINCE</p></div>
+            <div class="num1"><b class="counter-item-slow">11</b>K<p class="est">EVENTS</p></div>
+            <div class="num2"><b class="counter-item-slow"><?php echo $totalMembers; ?></b>K<p class="est">MEMBERS</p></div>
         </div>
     </section>
 
