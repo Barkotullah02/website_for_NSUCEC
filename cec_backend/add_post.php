@@ -111,10 +111,10 @@ if (isset($_POST['add_post'])) {
                         <a href="add_post.php"><i class="fa fa-fw fa-desktop"></i> ADD post</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Other actions <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="add_new_user.php">Add new user</a>
                             </li>
                             <li>
                                 <a href="#">Dropdown Item</a>
