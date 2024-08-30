@@ -1,10 +1,40 @@
 <?php
-include "db_connection.php";
 include "validate.php";
+include "db_connection.php";
 
-$query = "SELECT * FROM new_post ORDER BY sl DESC";
+if (isset($_POST['add'])) {
 
-$data = mysqli_query($connection, $query);
+    $password = $_POST['password'];
+
+    if ($password == $db_password) {
+
+        $full_name = $_POST['full_name'];
+        $username = $_POST['username'];
+        $image = $_FILES['image']['name'];
+        $tmp_image = $_FILES['image']['tmp_name'];
+        $new_password = $_POST['new_password'];
+
+
+        $full_name = mysqli_real_escape_string($connection, $full_name);
+        $username = mysqli_real_escape_string($connection, $username);
+        $new_password = mysqli_real_escape_string($connection, $new_password);
+
+        $query = "INSERT INTO admin_user(username, password, full_name, image, role) ";
+        $query .= "VALUES ('$username', '$new_password', '$full_name', '$image', 'admin')";
+
+        $insert = mysqli_query($connection, $query);
+
+        move_uploaded_file($tmp_image, "admin_img/$image");
+
+
+
+    }
+    elseif ($password != $db_password) {
+
+        header("Location: new_admin.php?source=password_does_not_match");
+        // code...
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,10 +101,10 @@ $data = mysqli_query($connection, $query);
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav" style="height: 100%;">
                     <li>
-                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Messages</a>
+                        <a href="message.php"><i class="fa fa-fw fa-envelope"></i> Messages</a>
                     </li>
                     <li>
                         <a href="new_admin.php"><i class="fa fa-fw fa-plus"></i> Add new admin</a>
@@ -113,24 +143,27 @@ $data = mysqli_query($connection, $query);
 
                 <!-- Page Heading -->
                 <div class="row">
-                    <div class="col-lg-12">
-                        <table class="table">
-                            <tr>
-                                <th>SERIAL</th><th>POST HEADING</th><th>POST DATE</th><th colspan="2" class="text-center">ACTION</th>
-                            </tr>
-                            <?php
-                            while ($row = mysqli_fetch_assoc($data)) {
-                                $sl = $row['sl'];
-                                $head = $row['headline'];
-                                $date = $row['post_date'];
-                                ?>
+                    <div class="container col-xs-12">
+                        <form action="new_admin.php" method="post" enctype="multipart/form-data" class="form-group">
 
-                                <tr>
-                                    <td><?php echo $sl; ?></td><td><?php echo $head; ?></td><td><?php echo $date; ?></td><td colspan="2"><a href="edit_post.php?source=sl&sl=<?php echo $sl;?>"><button class="btn btn-primary">UPDATE</button></a> <a style="float: right;" href="delete.php?source=sl&sl=<?php echo $sl;?>"><button class="btn btn-danger" name="delete">DELETE</button></a></td>
-                                </tr>
-
-                            <?php } ?>
-                        </table>
+                            <label for="member_type" >Member type</label>
+                            <input class="form-control" placeholder="Enter member type (e. g. probationary member" type="text" name="member_type"><br>
+                            <label for="full_name" >Enter full name</label>
+                            <input class="form-control" placeholder="Full name" type="text" name="full_name"><br>
+                            <label for="nsu_id" >NSU ID</label>
+                            <input class="form-control" placeholder="Enter NSU ID" type="number" name="nsu_id"><br>
+                            <label for="full_name" >Contact number</label>
+                            <input class="form-control" placeholder="Enter contact number" type="text" name="full_name"><br>
+                            <label for="email" >Email address</label>
+                            <input class="form-control" placeholder="Enter email address" type="email" name="email"><br>
+                            <label for="new_password" >Recruitment Batch</label>
+                            <input class="form-control" placeholder="Enter recruitment batch" type="password" name="recruitment_batch"><br>
+                            <label for="password" >Enter your password to add new user</label>
+                            <input class="form-control" placeholder="password" type="password" name="password"><br>
+                            <input class="form-control btn btn-primary" value="ADD NEW USER" type="submit" name="add"><br>
+                        </form>
+                    </div>
+               
                     </div>
                 </div>
                 <!-- /.row -->
