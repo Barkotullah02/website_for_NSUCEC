@@ -2,38 +2,36 @@
 include "validate.php";
 include "db_connection.php";
 
-if (isset($_POST['add'])) {
+if (isset($_POST['add_user'])) {
 
-    $password = $_POST['password'];
+    // $password = $_POST['password'];
 
-    if ($password == $db_password) {
+    // if ($password == $db_password) {
 
-        $full_name = $_POST['full_name'];
-        $username = $_POST['username'];
-        $image = $_FILES['image']['name'];
-        $tmp_image = $_FILES['image']['tmp_name'];
-        $new_password = $_POST['new_password'];
-
-
-        $full_name = mysqli_real_escape_string($connection, $full_name);
-        $username = mysqli_real_escape_string($connection, $username);
-        $new_password = mysqli_real_escape_string($connection, $new_password);
-
-        $query = "INSERT INTO admin_user(username, password, full_name, image, role) ";
-        $query .= "VALUES ('$username', '$new_password', '$full_name', '$image', 'admin')";
-
-        $insert = mysqli_query($connection, $query);
-
-        move_uploaded_file($tmp_image, "admin_img/$image");
+        $member_type = $_POST['member_type'];
+        $name = $_POST['name'];
+        $nsu_id = $_POST['nsu_id'];
+        $recruitment_batch = $_POST['recruitment_batch'];
+        $email = $_POST['email'];
+        $new_password = $_POST['nsu_id'];
+        $contact_number = $_POST['contact'];
 
 
+        // $name = mysqli_real_escape_string($connection, $name);
+        // $member_type = mysqli_real_escape_string($connection, $member_type);
+        // $email = mysqli_real_escape_string($connection, $email);
 
-    }
-    elseif ($password != $db_password) {
+        $new_user_query = "INSERT INTO users(member_type, name, nsu_id, password, recruitment_batch, contact_number, email) VALUES('$member_type', '$name', $nsu_id, '$new_password', $recruitment_batch, $contact_number, '$email')";
 
-        header("Location: new_admin.php?source=password_does_not_match");
-        // code...
-    }
+        $insert = mysqli_query($connection, $new_user_query);
+
+
+
+    // }
+    // elseif ($password != $db_password) {
+
+    //     header("Location: add_new_user.php?source=password_does_not_match");
+    // }
 }
 ?>
 
@@ -144,23 +142,23 @@ if (isset($_POST['add'])) {
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="container col-xs-12">
-                        <form action="new_admin.php" method="post" enctype="multipart/form-data" class="form-group">
+                        <form action="add_new_user.php" method="POST" class="form-group">
 
                             <label for="member_type" >Member type</label>
-                            <input class="form-control" placeholder="Enter member type (e. g. probationary member" type="text" name="member_type"><br>
+                            <input class="form-control" placeholder="Enter member type (e. g. probationary member)" type="text" name="member_type"><br>
                             <label for="full_name" >Enter full name</label>
-                            <input class="form-control" placeholder="Full name" type="text" name="full_name"><br>
+                            <input class="form-control" placeholder="Full name" type="text" name="name" required><br>
                             <label for="nsu_id" >NSU ID</label>
-                            <input class="form-control" placeholder="Enter NSU ID" type="number" name="nsu_id"><br>
-                            <label for="full_name" >Contact number</label>
-                            <input class="form-control" placeholder="Enter contact number" type="text" name="full_name"><br>
+                            <input class="form-control" placeholder="Enter NSU ID" type="number" name="nsu_id" required><br>
+                            <label for="contact" >Contact number</label>
+                            <input class="form-control" placeholder="Enter contact number" type="number" name="contact" required><br>
                             <label for="email" >Email address</label>
-                            <input class="form-control" placeholder="Enter email address" type="email" name="email"><br>
-                            <label for="new_password" >Recruitment Batch</label>
-                            <input class="form-control" placeholder="Enter recruitment batch" type="password" name="recruitment_batch"><br>
+                            <input class="form-control" placeholder="Enter email address" type="email" name="email" required><br>
+                            <label for="recruitment_batch" >Recruitment Batch</label>
+                            <input class="form-control" placeholder="Enter recruitment batch" type="number" name="recruitment_batch" required><br>
                             <label for="password" >Enter your password to add new user</label>
-                            <input class="form-control" placeholder="password" type="password" name="password"><br>
-                            <input class="form-control btn btn-primary" value="ADD NEW USER" type="submit" name="add"><br>
+                            <input class="form-control" placeholder="password" type="password" name="password" required><br>
+                            <input class="form-control btn btn-primary" value="ADD NEW USER" type="submit" name="add_user"><br>
                         </form>
                     </div>
                
