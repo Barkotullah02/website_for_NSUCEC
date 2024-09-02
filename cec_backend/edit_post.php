@@ -15,7 +15,6 @@ if (isset($_GET['sl'])) {
         $img_title = $row['image_title'];
         $details = $row['details'];
         $sl = $row['sl'];
-        // code...
     }
 }
 

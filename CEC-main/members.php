@@ -1,4 +1,4 @@
-<?php include "nav.php"; 
+<?php include "nav.php";
 include "db_connection.php";
 ?>
 
@@ -13,7 +13,7 @@ include "db_connection.php";
 </head>
 <body>
    <h3 class="text-center">Our Members</h3>
-   
+
    <!-- Flexbox container to align cards side by side -->
    <div class="d-flex flex-wrap justify-content-center">
    <?php
@@ -23,11 +23,11 @@ include "db_connection.php";
    while($m_row = mysqli_fetch_assoc($m_num)){
 
        $m_name =  $m_row['Member_Name'];
-       $m_id = $m_row['Member_Id'];
+       $m_id = $m_row['member_Id'];
        $m_image = $m_row['Member_Image'];
 
    ?>
-   
+
    <div class="card m-2" style="width: 18rem;">
        <img class="card-img-top" src="./<?php echo $m_image; ?>" alt="Card image cap">
        <div class="card-body">
@@ -40,7 +40,7 @@ include "db_connection.php";
    }
    ?>
    </div>
-   
+
    <!-- Bootstrap Bundle with Popper -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
    <?php  include 'footer.php';?>

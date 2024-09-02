@@ -6,12 +6,10 @@ include "db_connection.php";
 if (!isset($_SESSION['username'])) {
 
         header("Location: admin_login.php");
-    // code...
 }
 else if (isset($_SESSION['username'])) {
 
 if ($_SESSION['role'] == "admin") {
-    // code...
 
     $db_username = $_SESSION['username'];
     $db_password = $_SESSION['password'];
@@ -27,9 +25,8 @@ if ($_SESSION['role'] == "admin") {
 else if ($_SESSION['role'] != "admin") {
 
     header("Location: admin_login.php");
-    // code...
 }
-    // code...
+
 }
 
 

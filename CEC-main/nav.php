@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <?php 
+    <?php
     include "db_connection.php";
     echo'
     <nav class="navbar navbar-expand-lg">
@@ -55,6 +55,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="events.php">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="member_login.php">MEMBER LOGIN</a>
                     </li>
                 </ul>
             </div>

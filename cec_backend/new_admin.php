@@ -32,7 +32,6 @@ if (isset($_POST['add'])) {
     elseif ($password != $db_password) {
 
         header("Location: new_admin.php?source=password_does_not_match");
-        // code...
     }
 }
 ?>

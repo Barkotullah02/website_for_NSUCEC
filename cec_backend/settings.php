@@ -31,7 +31,6 @@ if (isset($_POST['update'])) {
         if (empty($image)) {
 
             echo "Image not entered";
-            // code...
         }
         
         else if (!empty($image)) {

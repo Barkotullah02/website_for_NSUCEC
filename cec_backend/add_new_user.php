@@ -1,37 +1,49 @@
 <?php
 include "validate.php";
 include "db_connection.php";
+date_default_timezone_set('Asia/Dhaka');
 
-if (isset($_POST['add_user'])) {
+function escape_data($data){
 
-    // $password = $_POST['password'];
+       $data = trim($data);
 
-    // if ($password == $db_password) {
+       $data = stripslashes($data);
 
-        $member_type = $_POST['member_type'];
-        $name = $_POST['name'];
+       $data = htmlspecialchars($data);
+
+
+       return $data;
+
+    }
+
+if (isset($_POST['add'])) {
+
+    $password = $_POST['password'];
+
+    if ($password == $db_password) {
+
+        $name = escape_data($_POST['name']);
         $nsu_id = $_POST['nsu_id'];
+        $contact = $_POST['contact'];
+        $email = escape_data($_POST['email']);
+        $member_type = escape_data($_POST['member_type']);
         $recruitment_batch = $_POST['recruitment_batch'];
-        $email = $_POST['email'];
         $new_password = $_POST['nsu_id'];
-        $contact_number = $_POST['contact'];
+        $date = date("Y-m-d h:i:sa");
 
 
-        // $name = mysqli_real_escape_string($connection, $name);
-        // $member_type = mysqli_real_escape_string($connection, $member_type);
-        // $email = mysqli_real_escape_string($connection, $email);
+        $query = "INSERT INTO users(name, member_type,	contact,	email,	password,	nsu_id,	recruitment_batch, added_by, time_date) VALUES ('$name', '$member_type' , $contact, '$email', '$new_password', $nsu_id, $recruitment_batch, '$full_name', '$date')";
 
-        $new_user_query = "INSERT INTO users(member_type, name, nsu_id, password, recruitment_batch, contact_number, email) VALUES('$member_type', '$name', $nsu_id, '$new_password', $recruitment_batch, $contact_number, '$email')";
-
-        $insert = mysqli_query($connection, $new_user_query);
+        $insert = mysqli_query($connection, $query);
 
 
 
-    // }
-    // elseif ($password != $db_password) {
 
-    //     header("Location: add_new_user.php?source=password_does_not_match");
-    // }
+    }
+    elseif ($password != $db_password) {
+
+        header("Location: add_new_user.php?source=password_does_not_match");
+    }
 }
 ?>
 
@@ -78,7 +90,7 @@ if (isset($_POST['add_user'])) {
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-           
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $full_name; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -142,26 +154,31 @@ if (isset($_POST['add_user'])) {
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="container col-xs-12">
-                        <form action="add_new_user.php" method="POST" class="form-group">
+                        <form action="add_new_user.php" method="post" enctype="multipart/form-data" class="form-group">
 
-                            <label for="member_type" >Member type</label>
-                            <input class="form-control" placeholder="Enter member type (e. g. probationary member)" type="text" name="member_type"><br>
+                            <label for="member_type" >Member type</label><br>
+                            <input type="radio" name="member_type" value="probationary member"><span> Probationary member</span><br>
+                            <input type="radio" name="member_type" value="general member"><span> General member</span><br>
+                            <input type="radio" name="member_type" value="senior member"><span> Senior member</span><br>
+                            <input type="radio" name="member_type" value="in-charge"><span> In charge</span><br>
+                            <input type="radio" name="member_type" value="sub-eb"><span> Sub executive body</span><br>
+                            <input type="radio" name="member_type" value="eb"><span> Executive body</span><br>
                             <label for="full_name" >Enter full name</label>
-                            <input class="form-control" placeholder="Full name" type="text" name="name" required><br>
+                            <input class="form-control" placeholder="Full name" type="text" name="name"><br>
                             <label for="nsu_id" >NSU ID</label>
-                            <input class="form-control" placeholder="Enter NSU ID" type="number" name="nsu_id" required><br>
-                            <label for="contact" >Contact number</label>
-                            <input class="form-control" placeholder="Enter contact number" type="number" name="contact" required><br>
+                            <input class="form-control" placeholder="Enter NSU ID" type="number" name="nsu_id"><br>
+                            <label for="full_name" >Contact number</label>
+                            <input class="form-control" placeholder="Enter contact number" type="text" name="contact"><br>
                             <label for="email" >Email address</label>
-                            <input class="form-control" placeholder="Enter email address" type="email" name="email" required><br>
+                            <input class="form-control" placeholder="Enter email address" type="email" name="email"><br>
                             <label for="recruitment_batch" >Recruitment Batch</label>
-                            <input class="form-control" placeholder="Enter recruitment batch" type="number" name="recruitment_batch" required><br>
+                            <input class="form-control" placeholder="Enter recruitment batch" type="number" name="recruitment_batch"><br>
                             <label for="password" >Enter your password to add new user</label>
-                            <input class="form-control" placeholder="password" type="password" name="password" required><br>
-                            <input class="form-control btn btn-primary" value="ADD NEW USER" type="submit" name="add_user"><br>
+                            <input class="form-control" placeholder="password" type="password" name="password"><br>
+                            <input class="form-control btn btn-primary" value="ADD NEW USER" type="submit" name="add">
                         </form>
                     </div>
-               
+
                     </div>
                 </div>
                 <!-- /.row -->
