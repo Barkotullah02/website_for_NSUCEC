@@ -24,17 +24,59 @@
 
   if (isset($_POST['update'])) {
 
-    $u_name = $_POST['u_name'];
-    $u_contact = $_POST['u_contact'];
-    $u_position = $_POST['u_position'];
-    $u_password = $_POST['u_pass'];
+
+
+
+    if (!empty($_POST['u_name'])) {
+
+      $u_name = $_POST['u_name'];
+
+      $n_query = "UPDATE users set name = '$u_name' where nsu_id = $db_nsuid";
+
+      $u_nquery = mysqli_query($connection, $n_query);
+
+        
+    }
+    if (!empty($_POST['u_contact'])) {
+
+      $u_contact = $_POST['u_contact'];
+
+      $c_query = "UPDATE users set contact = $u_contact where nsu_id = $db_nsuid";
+
+      $c_nquery = mysqli_query($connection, $c_query);
+        
+    }
+    if (!empty($_POST['u_position'])) {
+
+      $u_position = $_POST['u_position'];
+
+    }
+    if (!empty($_POST['u_pass'])) {
+
+      $u_password = $_POST['u_pass'];
     $u_re_password = $_POST['u_re_pass'];
+        
+    }
+    if (!empty($_POST['u_email'])) {
     $u_email = $_POST['u_email'];
-    $u_recruitment_batch = $_POST['recruitment_batch'];
-    $u_description = $_POST['u_description'];
-    $image = $_FILES['imaprofile_imgge']['name'];
-    $tmp_image = $_FILES['profile_img']['tmp_name'];
-    $u_achievements = $_POST['u_achievements'];
+        
+    }
+    if (!empty($_POST['u_description'])) {
+        
+      $u_description = $_POST['u_description'];
+
+    }
+    if (!empty($_FILES['profile_img'])) {
+
+      $image = $_FILES['profile_img']['name'];
+      $tmp_image = $_FILES['profile_img']['tmp_name'];
+        
+    }
+    if (!empty($_POST['u_achievements'])) {
+        
+      $u_achievements = $_POST['u_achievements'];
+
+    }
 
 
     $u_skill = " ";
@@ -99,8 +141,6 @@
       $u_skill .= $_POST['new_skill'] . ", ";
 
     }
-
-    echo $u_skill;
 
     
 

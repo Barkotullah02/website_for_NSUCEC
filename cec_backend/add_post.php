@@ -6,6 +6,10 @@ include "clear_text.php";
 
 if (isset($_POST['add_post'])) {
 
+    if (isset()) {
+        
+    }
+
     $headline = $_POST['headline'];
     $image = $_FILES['image']['name'];
     $tmp_image = $_FILES['image']['tmp_name'];
