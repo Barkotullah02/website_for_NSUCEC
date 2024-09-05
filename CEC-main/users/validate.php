@@ -19,6 +19,7 @@ else if (isset($_SESSION['member_type'])) {
 	$db_description = $_SESSION['description'];
 	$db_image = $_SESSION['image'];
 	$db_achievements = $_SESSION['achievements'];
+	$db_password = $_SESSION['password'];
 }
 
 ?>

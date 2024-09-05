@@ -28,7 +28,7 @@ if (isset($_POST['add'])) {
         $email = escape_data($_POST['email']);
         $member_type = escape_data($_POST['member_type']);
         $recruitment_batch = $_POST['recruitment_batch'];
-        $new_password = $_POST['nsu_id'];
+        $new_password = escape_data($_POST['nsu_id']);
         $date = date("Y-m-d h:i:sa");
 
 

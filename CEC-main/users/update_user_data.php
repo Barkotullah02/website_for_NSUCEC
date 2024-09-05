@@ -20,6 +20,19 @@
     $db_achievements = $row['achievements'];
   }
 
+  function escape_data($data){
+
+       $data = trim($data);
+
+       $data = stripslashes($data);
+
+       $data = htmlspecialchars($data);
+
+
+       return $data;
+
+    }
+
 
 
   if (isset($_POST['update'])) {
@@ -50,95 +63,183 @@
 
       $u_position = $_POST['u_position'];
 
-    }
-    if (!empty($_POST['u_pass'])) {
+      $p_query = "UPDATE users set member_type = '$u_position' where nsu_id = $db_nsuid";
 
-      $u_password = $_POST['u_pass'];
-    $u_re_password = $_POST['u_re_pass'];
-        
+      $p_nquery = mysqli_query($connection, $p_query);
+
+    }
+
+    if (isset($_POST['password'])) {
+
+      if ($_POST['password'] == $db_password) {
+
+        if (!empty($_POST['u_pass'])) {
+
+            $u_password = $_POST['u_pass'];
+            $u_re_password = $_POST['u_re_pass'];
+
+            if ($u_password == $u_re_password) {
+
+              if (strlen($u_password) < 6) {
+                echo "<b style='color: lightcoral;'>password must be at least 6 characters</b>";
+              }
+              else{
+                $p_query = "UPDATE users set password = '$u_password' where nsu_id = $db_nsuid";
+                $reset = mysqli_query($connection, $p_query);
+              }
+            }
+            
+        }
+      }
     }
     if (!empty($_POST['u_email'])) {
     $u_email = $_POST['u_email'];
+
+    $e_query = "UPDATE users set email = '$u_email' where nsu_id = $db_nsuid";
+
+    $e_nquery = mysqli_query($connection, $e_query);
         
     }
     if (!empty($_POST['u_description'])) {
         
-      $u_description = $_POST['u_description'];
+      $u_description = escape_data($_POST['u_description']);
+
+      $d_query = "UPDATE users set description = '$u_description' where nsu_id = $db_nsuid";
+
+      $d_nquery = mysqli_query($connection, $d_query);
 
     }
-    if (!empty($_FILES['profile_img'])) {
+    if (!empty($_FILES['profile_img']['name'])) {
 
       $image = $_FILES['profile_img']['name'];
       $tmp_image = $_FILES['profile_img']['tmp_name'];
+
+      $i_query = "UPDATE users set image = '$image' where nsu_id = $db_nsuid";
+
+      $i_nquery = mysqli_query($connection, $i_query);
         
+      move_uploaded_file($tmp_image, "users_img/$image");
     }
     if (!empty($_POST['u_achievements'])) {
         
       $u_achievements = $_POST['u_achievements'];
 
+
+      $a_query = "UPDATE users set achievements = '$u_achievements' where nsu_id = $db_nsuid";
+
+      $a_nquery = mysqli_query($connection, $a_query);
+
     }
 
 
-    $u_skill = " ";
+    $u_skill = $db_skills;
 
     if (isset($_POST['skill1'])) {
 
-      $u_skill = $_POST['skill1'] . ", ";
+      $u_skill .= $_POST['skill1'] . ", ";
+
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
 
     }
     if (isset($_POST['skill2'])) {
 
       $u_skill .= $_POST['skill2'] . ", ";
 
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
+
     }
     if (isset($_POST['skill3'])) {
 
       $u_skill .= $_POST['skill3'] . ", ";
+
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
 
     }
     if (isset($_POST['skill4'])) {
 
       $u_skill .= $_POST['skill4'] . ", ";
 
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
+
     }
     if (isset($_POST['skill5'])) {
 
       $u_skill .= $_POST['skill5'] . ", ";
+
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
 
     }
     if (isset($_POST['skill6'])) {
 
       $u_skill .= $_POST['skill6'] . ", ";
 
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
+
     }
     if (isset($_POST['skill7'])) {
 
       $u_skill .= $_POST['skill7'] . ", ";
+
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
 
     }
     if (isset($_POST['skill8'])) {
 
       $u_skill .= $_POST['skill8'] . ", ";
 
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
+
     }
     if (isset($_POST['skill9'])) {
 
       $u_skill .= $_POST['skill9'] . ", ";
+
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
 
     }
     if (isset($_POST['skill10'])) {
 
       $u_skill .= $_POST['skill10'] . ", ";
 
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
+
     }
     if (isset($_POST['skill11'])) {
 
       $u_skill .= $_POST['skill11'] . ", ";
 
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
+
     }
     if (isset($_POST['new_skill'])) {
 
       $u_skill .= $_POST['new_skill'] . ", ";
+
+      $s_query = "UPDATE users set skills = '$u_skill' where nsu_id = $db_nsuid";
+
+      $s_nquery = mysqli_query($connection, $s_query);
 
     }
 
@@ -353,7 +454,7 @@ border-bottom-right-radius: 15px;
 
                   <div class="mb-4 pb-2">
                     <div data-mdb-input-init class="form-outline form-white">
-                      <textarea type="text" id="form3Examplea2" class="form-control form-control-lg" name="u_desription" placeholder="a short bio of you"><?php echo $db_description; ?></textarea>
+                      <textarea type="text" id="form3Examplea2" class="form-control form-control-lg" name="u_description" placeholder="a short bio of you"><?php echo $db_description; ?></textarea>
                       <label class="form-label" for="form3Examplea2">Description</label>
                     </div>
                   </div>
@@ -378,7 +479,7 @@ border-bottom-right-radius: 15px;
                   </div>
                   <div class="mb-4">
                     <div data-mdb-input-init class="form-outline form-white">
-                        <input type="text" id="form3Examplea5" class="form-control form-control-lg" name="u_re_pass" placeholder="re-enter your new password" />
+                        <input type="password" id="form3Examplea5" class="form-control form-control-lg" name="u_re_pass" placeholder="re-enter your new password" />
                         <label class="form-label" for="form3Examplea5">Re-enter new password</label>
                     </div>
                   </div>
@@ -386,7 +487,7 @@ border-bottom-right-radius: 15px;
                   <div class="mb-4">
                     <div data-mdb-input-init class="form-outline form-white">
                       <input type="password" id="form3Examplea9" class="form-control form-control-lg" name="password" placeholder="enter your old password" />
-                      <label class="form-label" for="form3Examplea9">Enter your password to save changes</label>
+                      <label class="form-label" for="form3Examplea9">Enter your password to reset a new password changes</label>
                     </div>
                   </div>
 

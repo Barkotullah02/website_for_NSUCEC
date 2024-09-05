@@ -40,6 +40,7 @@ if (isset($_POST['login'])) {
 		$_SESSION['description'] = $db_description;
 		$_SESSION['image'] = $db_image;
 		$_SESSION['achievements'] = $db_achievements;
+		$_SESSION['password'] = $db_password;
 
 
 		if($db_password == $nsu_id){
